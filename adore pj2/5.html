@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task Form 5</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: url(ba.jpg);
+            background-size: cover;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            width: 80%;
+            max-width: 600px;
+            margin: 20px auto;
+            background-color: rgba(95, 158, 160, 0.85); 
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 5px;
+            backdrop-filter: blur(3px);
+        }
+        .tab-menu {
+            display: flex;
+            border-bottom: 1px solid #ccc;
+            margin-bottom: 20px;
+        }
+        .tab-menu div {
+            padding: 10px 20px;
+            cursor: pointer;
+        }
+        .tab-menu .active {
+            font-weight: bold;
+            border-bottom: 2px solid #000;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+        form label {
+            margin-top: 10px;
+            font-weight: bold;
+        }
+        form input[type="text"], 
+        form input[type="date"],
+        form input[type="number"],
+        form select {
+            width: calc(100% - 22px);
+            padding: 10px;
+            margin-top: 5px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+        }
+        form input[type="checkbox"] {
+            margin-right: 10px;
+        }
+        form .buttons {
+            display: flex;
+            justify-content: flex-end;
+            margin-top: 20px;
+        }
+        form .buttons input {
+            padding: 10px 20px;
+            margin-left: 10px;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+        form .buttons input[type="button"] {
+            background-color: #f0f0f0;
+        }
+        form .buttons input[type="submit"] {
+            background-color: #007bff;
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        
+        <div class="tab-menu">
+            <div class="active">General Details</div>
+        </div>
+        
+        
+        <form id="taskForm">
+        
+            <label for="title">Task name</label>
+            <input type="text" id="title" name="title" placeholder="Enter task name">
+
+            
+            <label for="project">Project</label>
+            <input type="text" id="project" name="project" placeholder="Enter project name">
+
+        
+            <label for="status">Work Status</label>
+            <select id="status" name="status">
+                <option value="finished" selected>Finished</option>
+                <option value="paused">Paused</option>
+                <option value="continue">Continue</option>
+            </select>
+
+            
+            <label for="start-date">Start date</label>
+            <input type="date" id="start-date" name="start-date" value="2000-01-01">
+
+            
+            <label for="dependency">Task Dependency</label>
+            <input type="text" id="dependency" name="dependency" placeholder="Enter dependency">
+
+            
+            <label for="dependency-type">Dependency Type</label>
+            <select id="dependency-type" name="dependency-type">
+                <option value="start-to-end" selected>Start to End</option>
+            </select>
+
+               <label for="estimation">Estimation (Time)</label>
+            <input type="number" id="estimation" name="estimation" placeholder="Enter hours">
+
+
+              <label for="Remark">Admin Remark</label>
+            <input type="text" id="remark" name="remark" placeholder="Remark">
+
+
+              <label for="Member Remark">Member Remark</label>
+            <input type="text" id="remark" name="remark" placeholder="Remark">
+
+            
+            <div class="buttons">
+                
+                <input type="button" value="Cancel" onclick="cancelTask()">
+                <input type="submit" value="Apply" onclick="applyTask(event)">
+            </div>
+        </form>
+        
+        
+        <ol id="Task List"></ol>
+    </div>
+
+    <script>
+       
+
+        // Function to cancel the task and reset the form
+        function cancelTask() {
+            document.getElementById('taskForm').reset();
+        }
+
+        // Function to apply the task, prevent form submission and show an alert
+        function applyTask(event) {
+            event.preventDefault();
+            addTask();
+            alert('Task applied successfully!');
+        }
+
+        // Function to add a task to the task list
+        function addTask() {
+            const taskList = document.getElementById('taskList');
+
+            // Get form values
+            const title = document.getElementById('title').value;
+            const project = document.getElementById('project').value;
+            const status = document.getElementById('status').value;
+            const startDate = document.getElementById('start-date').value;
+            const dependency = document.getElementById('dependency').value;
+            const dependencyType = document.getElementById('dependency-type').value;
+            const estimation = document.getElementById('estimation').value;
+
+            // Create a new list item
+            const listItem = document.createElement('li');
+            listItem.textContent = `Task: ${title}, Project: ${project}, Status: ${status}, Start Date: ${startDate}, Dependency: ${dependency}, Dependency Type: ${dependencyType}, Estimation: ${estimation} hours`;
+
+            // Append the new list item to the task list
+            taskList.appendChild(listItem);
+
+            // Reset the form after adding the task
+            document.getElementById('taskForm').reset();
+        }
+    </script>
+</body>
+</html>
